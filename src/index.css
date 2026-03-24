@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary — deep indigo to violet spectrum */
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+
+  /* Accent — electric blue to cyan */
+  --color-accent-300: #67e8f9;
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-accent-600: #0891b2;
+
+  /* Violet highlights */
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+
+  /* Surface — deep navy base */
+  --color-surface-50: #f0f4f8;
+  --color-surface-100: #e2e8f0;
+  --color-surface-200: #c9d5e3;
+  --color-surface-700: #2d3a4f;
+  --color-surface-800: #1a2332;
+  --color-surface-850: #141c2b;
+  --color-surface-900: #0c1220;
+  --color-surface-950: #060a14;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Dark mode — deep navy/midnight base */
+.dark body {
+  background-color: var(--color-surface-950);
+  color: var(--color-surface-100);
+}
+
+:not(.dark) body {
+  background-color: #ffffff;
+  color: var(--color-surface-900);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+.dark ::-webkit-scrollbar-thumb { background: var(--color-surface-700); border-radius: 3px; }
+:not(.dark) ::-webkit-scrollbar-thumb { background: var(--color-surface-200); border-radius: 3px; }
+
+/* Glow utilities */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.12), 0 0 60px rgba(99, 102, 241, 0.05);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.12), 0 0 60px rgba(6, 182, 212, 0.05);
+}
+
+.glow-violet {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.12), 0 0 60px rgba(139, 92, 246, 0.05);
+}
+
+/* Glass card */
+.glass-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.dark .glass-card {
+  background: rgba(12, 18, 32, 0.75);
+  border: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+:not(.dark) .glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+/* Gradient text — indigo → cyan */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient text — violet accent variant */
+.gradient-text-violet {
+  background: linear-gradient(135deg, var(--color-violet-400), var(--color-primary-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient border top glow */
+.gradient-border-top {
+  position: relative;
+}
+.gradient-border-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary-500), var(--color-accent-500), transparent);
+  opacity: 0.5;
+}
+
+/* Card with gradient hover border */
+.card-gradient-hover {
+  position: relative;
+  overflow: hidden;
+}
+.card-gradient-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-violet-500), var(--color-accent-500));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.card-gradient-hover:hover::before {
+  opacity: 1;
+}
+
+/* Section padding */
+.section-padding {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Hero gradient background */
+.hero-gradient-dark {
+  background: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 60% 80%, rgba(6, 182, 212, 0.04) 0%, transparent 50%),
+              var(--color-surface-950);
+}
+
+.hero-gradient-light {
+  background: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 60% 80%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
+              #ffffff;
+}
