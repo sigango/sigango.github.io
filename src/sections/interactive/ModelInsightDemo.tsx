@@ -44,21 +44,27 @@ function SimulatedVisualization({ mode, isDark }: { mode: string; isDark: boolea
     const dist = Math.sqrt((row - cy) ** 2 + (col - cx) ** 2);
     const maxDist = Math.sqrt(cx * cx + cy * cy);
 
+    let base = 0;
     switch (mode) {
       case 'saliency':
-        return Math.max(0, 1 - dist / maxDist + (Math.random() * 0.3));
+        base = Math.max(0, 1 - dist / maxDist + (Math.random() * 0.3));
+        break;
       case 'attention': {
         const topLeft = (row < 4 && col < 4) ? 0.5 : 0;
         const center = dist < 2.5 ? 0.8 : 0;
-        return Math.min(1, topLeft + center + Math.random() * 0.15);
+        base = Math.min(1, topLeft + center + Math.random() * 0.15);
+        break;
       }
       case 'activation':
-        return (Math.sin(row * 0.8) * Math.cos(col * 0.8) + 1) / 2 + Math.random() * 0.2;
+        base = (Math.sin(row * 0.8) * Math.cos(col * 0.8) + 1) / 2 + Math.random() * 0.2;
+        break;
       case 'gradcam':
-        return Math.max(0, 1 - (dist / maxDist) * 0.8);
+        base = Math.max(0, 1 - (dist / maxDist) * 0.8);
+        break;
       default:
-        return 0.5;
+        base = 0.5;
     }
+    return Math.min(1, Math.max(0, base));
   };
 
   const modeConfig = XAI_MODES.find((m) => m.id === mode);
@@ -66,47 +72,82 @@ function SimulatedVisualization({ mode, isDark }: { mode: string; isDark: boolea
 
   return (
     <div
-      className={`rounded-xl p-4 ${
+      className={`rounded-xl p-4 relative overflow-hidden ${
         isDark ? 'bg-surface-900 border border-surface-700/50' : 'bg-surface-50 border border-surface-200'
       }`}
     >
-      <div
-        className="grid gap-0.5 mx-auto"
-        style={{
-          gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-          maxWidth: '320px',
-          aspectRatio: '1',
-        }}
-      >
-        {cells.map((i) => {
-          const intensity = getIntensity(i, mode);
-          return (
-            <motion.div
-              key={`${mode}-${i}`}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.003, duration: 0.3 }}
-              className="rounded-sm"
-              style={{
-                backgroundColor: baseColor,
-                opacity: Math.min(1, Math.max(0.05, intensity * 0.9)),
-              }}
-            />
-          );
-        })}
+      <div className="relative mx-auto" style={{ maxWidth: '320px', aspectRatio: '1' }}>
+        {/* Background Image to give context to the heatmap */}
+        <div 
+          className="absolute inset-0 rounded-lg overflow-hidden border border-white/10"
+          style={{
+            backgroundImage: 'url("/backgrounds/neural-bg.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'grayscale(100%) contrast(120%)',
+            opacity: isDark ? 0.3 : 0.6
+          }}
+        />
+
+        {/* Heatmap Grid Overlay */}
+        <div
+          className="absolute inset-0 grid gap-0.5 mix-blend-screen"
+          style={{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }}
+        >
+          {cells.map((i) => {
+            const intensity = getIntensity(i, mode);
+            // Create a slight pulsing effect ranging from intensity*0.7 to intensity*1.0
+            const pulseValues = [
+              Math.max(0.1, intensity * 0.7),
+              Math.min(1, intensity * 1.1),
+              Math.max(0.1, Math.min(1, intensity * 0.8))
+            ];
+            
+            return (
+              <motion.div
+                key={`${mode}-${i}`}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ 
+                  opacity: pulseValues,
+                  scale: 1 
+                }}
+                transition={{ 
+                  opacity: {
+                    duration: 2 + Math.random() * 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: Math.random() * 1
+                  },
+                  scale: { duration: 0.4, delay: i * 0.005 }
+                }}
+                className="rounded-sm"
+                style={{
+                  backgroundColor: baseColor,
+                }}
+              />
+            );
+          })}
+        </div>
+        
+        {/* Scanning line effect */}
+        <motion.div
+          className="absolute left-0 right-0 h-1 bg-white/30 blur-sm mix-blend-overlay"
+          animate={{ top: ['0%', '100%', '0%'] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        />
       </div>
 
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: baseColor, opacity: 0.2 }} />
-          <span className={`text-xs ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>Low</span>
+          <span className={`text-xs ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>Low Impact</span>
         </div>
-        <span className={`text-xs font-mono ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>
-          Importance
+        <span className={`text-xs font-mono uppercase tracking-widest ${isDark ? 'text-surface-200/50' : 'text-surface-700/50'}`}>
+          {mode} Heatmap
         </span>
         <div className="flex items-center gap-2">
-          <span className={`text-xs ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>High</span>
-          <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: baseColor, opacity: 0.9 }} />
+          <span className={`text-xs ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>High Impact</span>
+          <div className="w-3 h-3 rounded-sm shadow-[0_0_8px_currentColor]" style={{ backgroundColor: baseColor, color: baseColor }} />
         </div>
       </div>
     </div>
