@@ -8,13 +8,10 @@ const CNN3DVisualizer = lazy(() =>
   import('../../components/three/CNN3DVisualizer').then((m) => ({ default: m.CNN3DVisualizer }))
 );
 
-/** Simulated mini-visualization for each pipeline step */
+/** Simulated real-world visualization for each pipeline step using the cv.jpg image */
 function StepVisualization({ stepIndex, isDark }: { stepIndex: number; isDark: boolean }) {
-  const gridSize = stepIndex <= 1 ? 8 : stepIndex <= 3 ? 6 : 4;
-  const cells = Array.from({ length: gridSize * gridSize });
-
-  const getColor = () => {
-    const colors = [
+  const getStepConfig = () => {
+    const configs = [
       { bg: '#3b82f6', label: 'RGB Input' },
       { bg: '#6366f1', label: 'Preprocessing' },
       { bg: '#8b5cf6', label: 'Feature Maps' },
@@ -22,64 +19,76 @@ function StepVisualization({ stepIndex, isDark }: { stepIndex: number; isDark: b
       { bg: '#06b6d4', label: 'Explainability' },
       { bg: '#10b981', label: 'Prediction' },
     ];
-    return colors[stepIndex] || colors[0];
+    return configs[stepIndex] || configs[0];
   };
 
-  const config = getColor();
+  const config = getStepConfig();
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <div
-        className="grid gap-[2px] rounded-lg overflow-hidden"
-        style={{
-          gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-          width: '160px',
-          height: '160px',
-        }}
-      >
-        {cells.map((_, i) => {
-          const row = Math.floor(i / gridSize);
-          const col = i % gridSize;
-          let opacity = 0.15;
-
-          // Different patterns per step
-          switch (stepIndex) {
-            case 0: // Input — gradient
-              opacity = 0.2 + (row / gridSize) * 0.6;
-              break;
-            case 1: // Preprocessing — uniform
-              opacity = 0.3 + Math.random() * 0.2;
-              break;
-            case 2: // Feature extraction — edge-like
-              opacity = Math.abs(Math.sin(row * 1.5) * Math.cos(col * 1.5)) * 0.7 + 0.15;
-              break;
-            case 3: // Inference — center hotspot
-              {
-                const cx = gridSize / 2 - 0.5;
-                const dist = Math.sqrt((row - cx) ** 2 + (col - cx) ** 2);
-                opacity = Math.max(0.1, Math.exp(-dist * dist / 4));
-              }
-              break;
-            case 4: // Explainability — heatmap
-              opacity = Math.max(0.1, 1 - Math.sqrt((row - 2) ** 2 + (col - 2) ** 2) / 4);
-              break;
-            case 5: // Prediction — sparse high confidence
-              opacity = (i === 5 || i === 10) ? 0.9 : 0.1 + Math.random() * 0.1;
-              break;
-          }
-
-          return (
+      <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden border border-surface-200/20 bg-black shadow-lg">
+        {/* Base Image */}
+        <motion.img 
+          src="/cv.jpg" 
+          alt="Eiffel Tower CV Input"
+          className="absolute inset-0 w-full h-full object-cover"
+          animate={{
+            filter: 
+              stepIndex === 0 ? 'grayscale(0%) blur(0px) contrast(100%)' :
+              stepIndex === 1 ? 'grayscale(100%) blur(2px) contrast(120%)' :
+              stepIndex === 2 ? 'grayscale(100%) contrast(300%) invert(100%)' :
+              'grayscale(0%) blur(0px) contrast(110%)',
+            opacity: stepIndex === 2 ? 0.8 : 1
+          }}
+          transition={{ duration: 0.5 }}
+        />
+        
+        {/* Inference Scanning Overlay (Step 3) */}
+        <AnimatePresence>
+          {stepIndex === 3 && (
             <motion.div
-              key={`step-${stepIndex}-${i}`}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.006, duration: 0.3 }}
-              style={{ backgroundColor: config.bg, opacity }}
+              initial={{ top: '-20%' }}
+              animate={{ top: '120%' }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+              className="absolute left-0 right-0 h-8 bg-gradient-to-b from-transparent via-cyan-500/40 to-transparent border-b border-cyan-400/80 mix-blend-overlay"
             />
-          );
-        })}
+          )}
+        </AnimatePresence>
+
+        {/* Explainability Heatmap (Step 4) */}
+        <AnimatePresence>
+          {stepIndex === 4 && (
+            <motion.div
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 0.85 }}
+               exit={{ opacity: 0 }}
+               className="absolute inset-0 mix-blend-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-500/80 via-yellow-500/20 to-transparent"
+               style={{ backgroundPosition: 'center 30%', backgroundSize: '120% 120%' }}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Prediction Bounding Box (Step 5) */}
+        <AnimatePresence>
+          {stepIndex === 5 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute border-2 border-green-500 bg-green-500/10"
+              // Adjust bounding box dynamically based on standard Eiffel tower photos
+              style={{ top: '10%', left: '25%', right: '25%', bottom: '10%' }}
+            >
+              <div className="absolute -top-6 left-0 bg-green-500 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-sm whitespace-nowrap shadow-md">
+                Eiffel Tower 98%
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <span className={`text-[10px] font-mono ${isDark ? 'text-surface-200/30' : 'text-surface-700/30'}`}>
+      
+      <span className={`text-[10px] font-mono tracking-widest uppercase ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>
         {config.label}
       </span>
     </div>
