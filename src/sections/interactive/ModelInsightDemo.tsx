@@ -81,11 +81,11 @@ function SimulatedVisualization({ mode, isDark }: { mode: string; isDark: boolea
         <div 
           className="absolute inset-0 rounded-lg overflow-hidden border border-white/10"
           style={{
-            backgroundImage: 'url("/backgrounds/neural-bg.jpg")',
+            backgroundImage: 'url("/cv.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             filter: 'grayscale(100%) contrast(120%)',
-            opacity: isDark ? 0.3 : 0.6
+            opacity: isDark ? 0.4 : 0.6
           }}
         />
 
