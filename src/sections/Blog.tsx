@@ -3,6 +3,7 @@ import { FiEdit3, FiClock, FiRss } from 'react-icons/fi';
 import { SectionHeading } from '../components/ui/SectionHeading';
 import { SectionBackground } from '../components/ui/SectionBackground';
 import { AnimateOnScroll } from '../components/animations/AnimateOnScroll';
+import { SpotlightCard } from '../components/animations/SpotlightCard';
 import { useLanguage } from '../hooks/useLanguage';
 
 const COMING_SOON_POSTS = [
@@ -66,40 +67,37 @@ export function Blog({ isDark }: { isDark: boolean }) {
         </AnimateOnScroll>
 
         {/* Preview cards */}
-        <div className="grid sm:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 gap-6 mt-8">
           {COMING_SOON_POSTS.map((post, i) => (
             <AnimateOnScroll key={post.title} delay={0.1 + i * 0.08}>
-              <div
-                className={`group rounded-xl p-5 transition-all duration-300 card-gradient-hover ${
-                  isDark
-                    ? 'bg-surface-800/40 border border-surface-700/30 hover:shadow-lg hover:shadow-primary-500/5'
-                    : 'bg-white border border-surface-200 shadow-sm hover:shadow-md'
-                }`}
+              <SpotlightCard
+                isDark={isDark}
+                className="group h-full p-6 transition-all duration-300 cursor-pointer"
               >
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-3">
-                    <FiEdit3 className={`${isDark ? 'text-primary-400' : 'text-primary-600'}`} size={14} />
-                    <span className={`text-xs font-mono ${isDark ? 'text-surface-200/30' : 'text-surface-700/30'}`}>
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex items-center gap-2 mb-4">
+                    <FiEdit3 className={`${isDark ? 'text-primary-400' : 'text-primary-600'}`} size={16} />
+                    <span className={`text-[10px] uppercase font-mono tracking-widest ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>
                       {t.blog.draft}
                     </span>
                   </div>
-                  <h3 className={`text-base font-semibold mb-3 leading-snug ${isDark ? 'text-surface-50' : 'text-surface-900'}`}>
+                  <h3 className={`text-lg font-bold mb-4 flex-1 leading-snug group-hover:text-primary-500 transition-colors ${isDark ? 'text-surface-50' : 'text-surface-900'}`}>
                     {post.title}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <div className="flex gap-1.5">
+                  <div className="flex items-center justify-between mt-auto pt-6 border-t border-surface-200/10 dark:border-surface-700/30 group-hover:border-primary-500/20 transition-colors">
+                    <div className="flex gap-2">
                       {post.tags.map((tag) => (
-                        <span key={tag} className={`text-[10px] font-medium px-2 py-0.5 rounded-md ${
-                          isDark ? 'bg-surface-700/50 text-surface-200/50' : 'bg-surface-100 text-surface-700/50'
+                        <span key={tag} className={`text-[10px] font-semibold tracking-wide uppercase px-2 py-1 rounded-md ${
+                          isDark ? 'bg-surface-800 text-surface-300' : 'bg-surface-100 text-surface-600'
                         }`}>{tag}</span>
                       ))}
                     </div>
-                    <span className={`text-[10px] flex items-center gap-1 ${isDark ? 'text-surface-200/30' : 'text-surface-700/30'}`}>
-                      <FiClock size={10} /> {post.readTime}
+                    <span className={`text-xs font-medium flex items-center gap-1.5 ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>
+                      <FiClock size={12} /> {post.readTime}
                     </span>
                   </div>
                 </div>
-              </div>
+              </SpotlightCard>
             </AnimateOnScroll>
           ))}
         </div>

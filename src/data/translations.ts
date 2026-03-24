@@ -51,6 +51,9 @@ export interface Translations {
   research: {
     title: string;
     subtitle: string;
+    themesTitle: string;
+    themesSubtitle: string;
+    publicationTitle: string;
     publishedPaper: string;
     readPaper: string;
     googleScholar: string;
@@ -58,6 +61,11 @@ export interface Translations {
   };
   // Skills
   skills: {
+    title: string;
+    subtitle: string;
+  };
+  // Process
+  process: {
     title: string;
     subtitle: string;
   };
@@ -71,7 +79,7 @@ export interface Translations {
       insight: string;
     };
   };
-  // Blog
+  // Blog / Research Notes
   blog: {
     title: string;
     subtitle: string;
@@ -165,8 +173,11 @@ const en: Translations = {
     liveDemo: 'Live Demo',
   },
   research: {
-    title: 'Research & Publication',
-    subtitle: 'Contributing to the body of knowledge in AI and computer vision',
+    title: 'Research Themes & Publications',
+    subtitle: 'Exploring the frontiers of computer vision and physics-informed AI',
+    themesTitle: 'Core Research Areas',
+    themesSubtitle: 'My academic focus and investigative directions',
+    publicationTitle: 'Selected Publications',
     publishedPaper: 'Published Paper',
     readPaper: 'Read Paper',
     googleScholar: 'Google Scholar',
@@ -175,6 +186,10 @@ const en: Translations = {
   skills: {
     title: 'Skills & Technologies',
     subtitle: 'Technical toolkit spanning AI research and software engineering',
+  },
+  process: {
+    title: 'Engineering Process',
+    subtitle: 'Rigorous methodology from problem framing to production deployment',
   },
   aiLab: {
     title: 'AI & Computer Vision Lab',
@@ -186,11 +201,11 @@ const en: Translations = {
     },
   },
   blog: {
-    title: 'Blog',
-    subtitle: 'Thoughts on AI research, computer vision, and engineering',
+    title: 'Research Notes & Writing',
+    subtitle: 'Drafts, technical explorations, and thoughts on AI systems',
     comingSoon: 'Coming Soon',
-    comingSoonDescription: 'I\'m currently working on in-depth articles about AI, computer vision, and research methodology. Stay tuned!',
-    draft: 'Draft',
+    comingSoonDescription: 'Currently drafting technical deep-dives into explainable AI, robust vision models, and engineering infrastructure. Check back shortly.',
+    draft: 'Draft in Progress',
   },
   contact: {
     title: 'Get in Touch',
@@ -273,8 +288,11 @@ const de: Translations = {
     liveDemo: 'Live-Demo',
   },
   research: {
-    title: 'Forschung & Publikation',
-    subtitle: 'Beiträge zum Wissensstand in KI und Computer Vision',
+    title: 'Forschungsschwerpunkte & Publikationen',
+    subtitle: 'Erforschung der Grenzen von Computer Vision und physik-informierter KI',
+    themesTitle: 'Zentrale Forschungsbereiche',
+    themesSubtitle: 'Mein akademischer Fokus und Untersuchungsrichtungen',
+    publicationTitle: 'Ausgewählte Publikationen',
     publishedPaper: 'Veröffentlichter Artikel',
     readPaper: 'Artikel lesen',
     googleScholar: 'Google Scholar',
@@ -283,6 +301,10 @@ const de: Translations = {
   skills: {
     title: 'Kompetenzen & Technologien',
     subtitle: 'Technisches Repertoire über KI-Forschung und Softwareentwicklung hinweg',
+  },
+  process: {
+    title: 'Entwicklungsprozess',
+    subtitle: 'Rigorose Methodik von der Problemstellung bis zum produktiven Einsatz',
   },
   aiLab: {
     title: 'KI- & Computer-Vision-Labor',
@@ -294,11 +316,11 @@ const de: Translations = {
     },
   },
   blog: {
-    title: 'Blog',
-    subtitle: 'Gedanken zu KI-Forschung, Computer Vision und Softwareentwicklung',
+    title: 'Forschungsnotizen',
+    subtitle: 'Entwürfe, technische Untersuchungen und Gedanken zu KI-Systemen',
     comingSoon: 'Demnächst verfügbar',
-    comingSoonDescription: 'Ich arbeite derzeit an fundierten Artikeln über KI, Computer Vision und Forschungsmethodik. Bleiben Sie dran!',
-    draft: 'Entwurf',
+    comingSoonDescription: 'Derzeit entwerfe ich technische Deep-Dives zu erklärbarer KI, robusten Vision-Modellen und Software-Infrastruktur. Schauen Sie bald wieder vorbei.',
+    draft: 'Entwurf in Bearbeitung',
   },
   contact: {
     title: 'Kontakt aufnehmen',

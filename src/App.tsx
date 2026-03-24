@@ -3,6 +3,7 @@ import { Footer } from './components/layout/Footer';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
 import { Experience } from './sections/Experience';
+import { EngineeringProcess } from './sections/EngineeringProcess';
 import { Projects } from './sections/Projects';
 import { Research } from './sections/Research';
 import { Skills } from './sections/Skills';
@@ -23,8 +24,9 @@ export default function App() {
           <Hero isDark={isDark} />
           <About isDark={isDark} />
           <Experience isDark={isDark} />
-          <Projects isDark={isDark} />
           <Research isDark={isDark} />
+          <Projects isDark={isDark} />
+          <EngineeringProcess isDark={isDark} />
           <Skills isDark={isDark} />
           <InteractiveAI isDark={isDark} />
           <Blog isDark={isDark} />
