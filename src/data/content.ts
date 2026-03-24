@@ -3,17 +3,19 @@ import type {
   ResearchIdea,
   CVPipelineStep,
   RAGStage,
+  ResearchTheme,
+  EngineeringStep,
 } from '../types/content';
 
 export const siteContent: SiteContent = {
   name: 'Phuc Linh Ngo',
   title: 'AI Engineer & Computer Vision Researcher',
   shortSummary:
-    'Building intelligent systems at the intersection of computer vision, multimodal AI, and research-driven software engineering. Focused on turning deep technical insight into impactful, deployable solutions.',
+    'Master\'s student in AI & Machine Learning at TU Darmstadt. I build and research robust computer vision systems, bridging strong academic foundations with scalable software engineering.',
   longAbout:
-    'I am an AI engineer with a strong focus on computer vision and deep learning research. My work bridges the gap between academic research and production engineering — from designing novel neural architectures for visual understanding to building robust software systems that bring AI capabilities to real-world applications. I am driven by the belief that the most impactful AI work happens when rigorous research meets clean, scalable engineering.',
+    'I am an AI engineer and computer vision researcher, currently pursuing my Master\'s in AI and Machine Learning at TU Darmstadt. My work lives at the intersection of rigorous academic research and practical software engineering. I focus on visual representation learning, generative modeling, and physics-informed neural architectures. I believe the most impactful AI solutions occur when deep, research-backed insights are matched by clean, scalable implementation. I am driven to build systems that infer accurately, perform reliably, and scale gracefully.',
   missionStatement:
-    'To advance the frontiers of computer vision and AI through research-minded engineering — building systems that are not only technically sound but also responsible, interpretable, and deployable at scale.',
+    'To advance visual perception and reasoning algorithms by combining rigorous academic research with world-class system engineering.',
   profileImage: '/profile.png',
   cvUrl: '/cv.pdf',
   socialLinks: [
@@ -36,9 +38,9 @@ export const siteContent: SiteContent = {
   ],
   interests: [
     { label: 'Computer Vision' },
-    { label: 'Generative AI' },
-    { label: 'Physics-Informed Machine Learning' },
-    { label: 'AI for Public Health' },
+    { label: 'Representation Learning' },
+    { label: 'Generative Models' },
+    { label: 'Robustness' },
   ],
   experiences: [
     {
@@ -48,10 +50,10 @@ export const siteContent: SiteContent = {
       location: 'Darmstadt, Germany',
       dateRange: '04.2026',
       achievements: [
-        'Implementation and application of computer vision approaches.',
-        'Application of methods from security-relevant areas such as visual age estimation.',
+        'Researching and deploying security-critical computer vision systems, focusing on adversarial robustness and reliable visual inference.',
+        'Developing production-grade visual age estimation algorithms, minimizing bias algorithms across diverse demographics.',
       ],
-      technologies: ['Computer Vision', 'Python', 'PyTorch'],
+      technologies: ['PyTorch', 'OpenCV', 'Robustness Analysis', 'Python'],
     },
     {
       id: 'exp-2',
@@ -60,11 +62,11 @@ export const siteContent: SiteContent = {
       location: 'Dreieich, Germany',
       dateRange: '10.2024 - Present',
       achievements: [
-        'Developed and deployed an AI chatbot for customer service using Retrieval-Augmented Generation (RAG) techniques, integrated ChatGPT API, and deployed the product to production.',
-        'Configured cloud infrastructure and on-premise servers system.',
-        'Tested and deployed new internal software applications for logistics management, ensuring seamless operation.',
+        'Architected and deployed a highly scalable Retrieval-Augmented Generation (RAG) customer service pipeline into production environments.',
+        'Engineered underlying cloud inference infrastructure and optimized on-premise deployment mechanisms, reducing system latency.',
+        'Led end-to-end integration testing for internal logistics management software prior to enterprise rollout.',
       ],
-      technologies: ['RAG', 'ChatGPT API', 'Cloud Infrastructure', 'On-Premise Servers'],
+      technologies: ['RAG', 'LLM Engineering', 'Cloud Infrastructure', 'Docker'],
     },
     {
       id: 'exp-3',
@@ -73,23 +75,23 @@ export const siteContent: SiteContent = {
       location: 'Binh Duong, Vietnam',
       dateRange: '01.2024 - Present',
       achievements: [
-        'Engaged in cutting-edge research in Artificial Intelligence and Machine Learning, developing innovative solutions to complex public health problems.',
-        'Focused on Computer Vision and Remote Sensing applications for disease control.',
-        'Developed Physics-Informed Neural Networks (PINNs) for forecasting and solving public health challenges.',
+        'Spearheading applied research utilizing multi-spectral biological imaging and computer vision to model public health threats.',
+        'Designed and trained Physics-Informed Neural Networks (PINNs) to mathematically constrain predictive epidemiological models.',
+        'Co-authored research demonstrating the efficacy of Unmanned Aerial Vehicles combined with U-Net variations for automated habitat detection.',
       ],
-      technologies: ['Machine Learning', 'Remote Sensing', 'PINNs', 'Public Health AI'],
+      technologies: ['Remote Sensing', 'PINNs', 'U-Net', 'PyTorch'],
     },
     {
       id: 'exp-4',
-      role: 'Application Administration and Developer Intern',
+      role: 'Application Developer Intern',
       organization: 'Vietnamese German University',
       location: 'Binh Duong, Vietnam',
       dateRange: '01.2023 - 05.2023',
       achievements: [
-        'Developed a new webpage for the Vietnamese-German University as a Web Developer Intern. Conducted a comprehensive review and evaluation of the existing website.',
-        'Designed a new UI and programmed the new website using PHP and WordPress, ensuring responsiveness and brand consistency.',
+        'Conducted comprehensive architectural review of existing institutional portals, identifying optimization and security bottlenecks.',
+        'Developed resilient UI/UX components and backend logic for the university\'s core digital platform utilizing robust web frameworks.',
       ],
-      technologies: ['PHP', 'WordPress', 'Web Development', 'UI Design'],
+      technologies: ['Web Architecture', 'PHP', 'UI/UX System Design'],
     },
   ],
   projects: [
@@ -108,6 +110,9 @@ export const siteContent: SiteContent = {
       categories: ['Forecasting', 'Research'],
       githubUrl: '#',
       demoUrl: '#',
+      caseStudy: true,
+      learnings: 'I learned how to mathematically constrain neural network loss functions using differential equations (SIR models), fundamentally changing how I approach domain-specific deep learning beyond standard data-driven methods.',
+      future: 'Future iterations will incorporate vision-language models to dynamically analyze satellite imagery and fuse it with the PINN architecture in real-time.',
     },
     {
       id: 'proj-2',
@@ -314,5 +319,74 @@ export const cvPipelineSteps: CVPipelineStep[] = [
       'Post-processing, thresholding, and NMS refine raw outputs into actionable predictions with confidence scores.',
     icon: '✅',
   },
+];
+
+export const researchThemes: ResearchTheme[] = [
+  {
+    id: 'theme-1',
+    title: 'Explainable Computer Vision',
+    description: 'Developing methods to peer inside the "black box" of deep visual models, ensuring high-stakes predictions are interpretable, trustworthy, and mathematically sound.',
+    icon: '🔍',
+    tags: ['Grad-CAM', 'Feature Attribution', 'Saliency Maps']
+  },
+  {
+    id: 'theme-2',
+    title: 'Generative Visual Models',
+    description: 'Exploring the latent spaces of Variational Autoencoders and Diffusion models to synthesize training data, augment medical imaging datasets, and detect synthetic artifacts.',
+    icon: '✨',
+    tags: ['Diffusion', 'VAEs', 'Synthetic Images']
+  },
+  {
+    id: 'theme-3',
+    title: 'Adversarial Robustness',
+    description: 'Investigating vulnerabilities in state-of-the-art vision models against data poisoning and adversarial perturbations to build more resilient architectures.',
+    icon: '🛡️',
+    tags: ['Data Poisoning', 'Defense Mechanisms', 'Security']
+  },
+  {
+    id: 'theme-4',
+    title: 'Physics-Informed ML',
+    description: 'Bridging deep learning with physical and biological laws. Encoding domain knowledge as strict mathematical constraints within neural network loss functions.',
+    icon: '⚛️',
+    tags: ['PINNs', 'Epidemiology', 'Dynamical Systems']
+  }
+];
+
+export const engineeringProcess: EngineeringStep[] = [
+  {
+    id: 'proc-1',
+    step: '01',
+    title: 'Problem Framing',
+    description: 'Translating ambiguous, real-world objectives into precise mathematical constraints and clearly defined machine learning tasks.',
+    icon: '🎯'
+  },
+  {
+    id: 'proc-2',
+    step: '02',
+    title: 'Data & Representation',
+    description: 'Curating, cleaning, and structuring the dataset. Selecting the optimal feature representations and defining robust augmentation pipelines.',
+    icon: '📊'
+  },
+  {
+    id: 'proc-3',
+    step: '03',
+    title: 'Modeling & Experiments',
+    description: 'Iteratively designing neural architectures, implementing baselines, tuning hyperparameters, and rigorously tracking experimental metrics.',
+    icon: '🔬'
+  },
+  {
+    id: 'proc-4',
+    step: '04',
+    title: 'Validation & Interpretation',
+    description: 'Poking holes in the model. Deploying adversarial testing and explainability tools (XAI) to ensure the model makes decisions for the right reasons.',
+    icon: '⚖️'
+  },
+  {
+    id: 'proc-5',
+    step: '05',
+    title: 'Deployment',
+    description: 'Optimizing the final architecture for inference speed, packaging into containerized services, and deploying robustly to the cloud or edge devices.',
+    icon: '🚀'
+  }
 ];
 

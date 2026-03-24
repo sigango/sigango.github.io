@@ -25,6 +25,12 @@ export interface Project {
   categories: ProjectCategory[];
   githubUrl: string;
   demoUrl: string;
+  // Case Study fields
+  caseStudy?: boolean;
+  learnings?: string;
+  future?: string;
+  // Expanding tech stack for case studies
+  architectureUrl?: string;
 }
 
 export type ProjectCategory =
@@ -53,6 +59,22 @@ export interface SkillCategory {
 export interface InterestChip {
   label: string;
   icon?: string;
+}
+
+export interface ResearchTheme {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  tags: string[];
+}
+
+export interface EngineeringStep {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+  icon: string;
 }
 
 export interface SiteContent {
