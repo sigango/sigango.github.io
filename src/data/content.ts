@@ -36,10 +36,8 @@ export const siteContent: SiteContent = {
   ],
   interests: [
     { label: 'Computer Vision' },
-    { label: 'Multimodal AI' },
     { label: 'Generative AI' },
-    { label: 'RAG Systems' },
-    { label: 'Physics-Informed Learning' },
+    { label: 'Physics-Informed Machine Learning' },
     { label: 'AI for Public Health' },
   ],
   experiences: [
@@ -168,7 +166,7 @@ export const siteContent: SiteContent = {
         'Manual surveillance of mosquito breeding sites is labor-intensive, costly, and often insufficient for effective vector control programs.',
       approach:
         'Deployed low-cost drones equipped with cameras to capture aerial imagery of potential breeding sites, then applied object detection and segmentation models to identify water bodies and vegetation patterns.',
-      techStack: ['Python', 'OpenCV', 'TensorFlow', 'QGIS', 'Drone SDK'],
+      techStack: ['Python', 'OpenCV', 'TensorFlow', 'Drone SDK'],
       outcome:
         'Demonstrated feasibility of automated habitat detection, reducing survey time and cost while improving spatial coverage of surveillance.',
       categories: ['Computer Vision', 'Research', 'Software Systems'],
@@ -190,7 +188,7 @@ export const siteContent: SiteContent = {
   skillCategories: [
     {
       name: 'Languages',
-      skills: ['Python', 'C/C++', 'R', 'SQL', 'Bash', 'TypeScript', 'JavaScript'],
+      skills: ['Python', 'C/C++', 'R', 'Bash', 'TypeScript'],
     },
     {
       name: 'AI & ML Frameworks',
@@ -202,11 +200,11 @@ export const siteContent: SiteContent = {
     },
     {
       name: 'Web & Software Engineering',
-      skills: ['React', 'Node.js', 'REST APIs', 'PostgreSQL', 'MongoDB', 'HTML/CSS'],
+      skills: ['React', 'Node.js', 'MongoDB', 'HTML/CSS'],
     },
     {
       name: 'Tools & Platforms',
-      skills: ['Git', 'Docker', 'Linux', 'AWS', 'GitHub Actions', 'VS Code', 'LaTeX'],
+      skills: ['Git', 'Docker', 'Linux', 'AWS', 'GitHub Actions', 'VSCode', 'LaTeX'],
     },
   ],
   contactEmail: 'phuclinh9090@gmail.com',
@@ -318,71 +316,3 @@ export const cvPipelineSteps: CVPipelineStep[] = [
   },
 ];
 
-export const ragStages: RAGStage[] = [
-  {
-    id: 'rag-1',
-    title: 'Document Ingestion',
-    description: 'Loading and parsing documents from various sources.',
-    details: [
-      'PDF, Markdown, HTML parsing',
-      'Metadata extraction',
-      'Document cleaning and normalization',
-      'Source tracking for citations',
-    ],
-  },
-  {
-    id: 'rag-2',
-    title: 'Chunking',
-    description: 'Splitting documents into semantically meaningful segments.',
-    details: [
-      'Recursive text splitting',
-      'Semantic boundary detection',
-      'Overlap for context continuity',
-      'Chunk size optimization',
-    ],
-  },
-  {
-    id: 'rag-3',
-    title: 'Embedding',
-    description: 'Converting text chunks into dense vector representations.',
-    details: [
-      'Transformer-based encoders',
-      'Dimensionality: 768–1536',
-      'Batch processing for efficiency',
-      'Model: OpenAI, Cohere, or open-source',
-    ],
-  },
-  {
-    id: 'rag-4',
-    title: 'Vector Retrieval',
-    description: 'Searching for semantically similar chunks given a query.',
-    details: [
-      'Approximate nearest neighbor search',
-      'Cosine similarity scoring',
-      'Top-k retrieval with filtering',
-      'Vector DB: Pinecone, Weaviate, FAISS',
-    ],
-  },
-  {
-    id: 'rag-5',
-    title: 'Context Assembly',
-    description: 'Constructing the prompt with retrieved context and query.',
-    details: [
-      'Context window management',
-      'Relevance re-ranking',
-      'Prompt template formatting',
-      'Token budget optimization',
-    ],
-  },
-  {
-    id: 'rag-6',
-    title: 'LLM Response',
-    description: 'Generating the final grounded answer from the language model.',
-    details: [
-      'Grounded generation with citations',
-      'Hallucination mitigation',
-      'Streaming output support',
-      'Response quality evaluation',
-    ],
-  },
-];

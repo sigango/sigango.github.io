@@ -48,7 +48,6 @@ export function Hero({ isDark }: { isDark: boolean }) {
     >
       {/* 3D Background (with WebGL fallback) */}
       <div className="absolute inset-0 z-0">
-        <SectionBackground isDark={isDark} imageSrc="/backgrounds/neural-bg.jpg" opacity={0.5} className="z-0" />
         
         {webglSupported && !prefersReduced ? (
           <div className="absolute inset-0 z-10">

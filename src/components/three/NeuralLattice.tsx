@@ -10,30 +10,33 @@ function NeuralLatticeInner({ pointer }: NeuralLatticeInnerProps) {
   const groupRef = useRef<THREE.Group>(null!);
 
   const { pointsGeometry, linesGeometry } = useMemo(() => {
-    const gridSize = 7;
-    const spacing = 1.1;
+    const pointCount = 200;
+    const radius = 5;
+    const connectionRadius = 1.8;
     const points: number[] = [];
     const lines: number[] = [];
 
-    for (let x = 0; x < gridSize; x++) {
-      for (let y = 0; y < gridSize; y++) {
-        for (let z = 0; z < gridSize; z++) {
-          const px = (x - gridSize / 2) * spacing;
-          const py = (y - gridSize / 2) * spacing;
-          const pz = (z - gridSize / 2) * spacing;
-          points.push(px, py, pz);
-        }
-      }
+    // Distribute points organically inside a sphere
+    for (let i = 0; i < pointCount; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(Math.random() * 2 - 1);
+      const r = Math.cbrt(Math.random()) * radius;
+      points.push(
+        r * Math.sin(phi) * Math.cos(theta),
+        r * Math.sin(phi) * Math.sin(theta),
+        r * Math.cos(phi)
+      );
     }
 
-    const totalPoints = gridSize * gridSize * gridSize;
-    for (let i = 0; i < totalPoints; i++) {
-      for (let j = i + 1; j < totalPoints; j++) {
+    // Connect nodes that are close to each other
+    for (let i = 0; i < pointCount; i++) {
+      for (let j = i + 1; j < pointCount; j++) {
         const dx = points[i * 3] - points[j * 3];
         const dy = points[i * 3 + 1] - points[j * 3 + 1];
         const dz = points[i * 3 + 2] - points[j * 3 + 2];
         const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        if (dist < spacing * 1.25) {
+        
+        if (dist < connectionRadius) {
           lines.push(
             points[i * 3], points[i * 3 + 1], points[i * 3 + 2],
             points[j * 3], points[j * 3 + 1], points[j * 3 + 2]
