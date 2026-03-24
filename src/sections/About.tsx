@@ -35,11 +35,11 @@ export function About({ isDark }: { isDark: boolean }) {
 
           {/* Content */}
           <div className="lg:col-span-3 space-y-6">
-            <AnimateOnScroll delay={0.1}>
-              <p className={`text-base leading-relaxed ${isDark ? 'text-surface-200/80' : 'text-surface-700'}`}>
-                {siteContent.longAbout}
-              </p>
-            </AnimateOnScroll>
+            <div className="space-y-6">
+            <p className={`text-lg leading-relaxed ${isDark ? 'text-surface-200/80' : 'text-surface-800'}`}>
+              {siteContent.longAbout} I specialize in both AI research and robust <strong>Software Engineering</strong>, ensuring that complex models are built on scalable, production-ready infrastructure.
+            </p>
+            </div>
 
             <AnimateOnScroll delay={0.2}>
               <div className={`p-5 rounded-xl border-l-4 border-primary-500 ${isDark ? 'bg-surface-800/50' : 'bg-primary-50/50'}`}>

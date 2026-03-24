@@ -8,7 +8,6 @@ import { Projects } from './sections/Projects';
 import { Research } from './sections/Research';
 import { Skills } from './sections/Skills';
 import { InteractiveAI } from './sections/InteractiveAI';
-import { Blog } from './sections/Blog';
 import { Contact } from './sections/Contact';
 import { useTheme } from './hooks/useTheme';
 import { LanguageProvider } from './hooks/useLanguage';
@@ -25,11 +24,10 @@ export default function App() {
           <About isDark={isDark} />
           <Experience isDark={isDark} />
           <Research isDark={isDark} />
+          <Skills isDark={isDark} />
           <Projects isDark={isDark} />
           <EngineeringProcess isDark={isDark} />
-          <Skills isDark={isDark} />
           <InteractiveAI isDark={isDark} />
-          <Blog isDark={isDark} />
           <Contact isDark={isDark} />
         </main>
         <Footer isDark={isDark} />
