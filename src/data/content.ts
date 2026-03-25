@@ -212,7 +212,7 @@ export const siteContent: SiteContent = {
       skills: ['Git', 'Docker', 'Linux', 'AWS', 'GitHub Actions', 'VSCode', 'LaTeX'],
     },
   ],
-  contactEmail: 'phuclinh9090@gmail.com',
+  contactEmail: 'linhngo.master@gmail.com',
   contactMessage:
     'I am always open to discussing AI research, computer vision projects, software engineering collaborations, or graduate research opportunities. Feel free to reach out.',
 };
