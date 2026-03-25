@@ -32,7 +32,7 @@ export const siteContent: SiteContent = {
     },
     {
       label: 'Email',
-      url: 'mailto:phuclinh9090@gmail.com',
+      url: 'mailto:phuclinh.master@gmail.com',
       icon: 'email',
     },
   ],
