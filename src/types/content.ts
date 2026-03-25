@@ -93,6 +93,7 @@ export interface SiteContent {
   skillCategories: SkillCategory[];
   contactEmail: string;
   contactMessage: string;
+  formspreeId?: string;
 }
 
 export interface ResearchIdea {

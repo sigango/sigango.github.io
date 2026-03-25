@@ -50,31 +50,45 @@ export function Contact({ isDark }: { isDark: boolean }) {
           </AnimateOnScroll>
 
           <AnimateOnScroll direction="right" delay={0.2}>
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST"
-              className={`rounded-xl p-6 space-y-4 ${isDark ? 'bg-surface-800/60 border border-surface-700/50' : 'bg-white border border-surface-200 shadow-sm'}`}>
-              <div>
-                <label htmlFor="contact-name" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.name}</label>
-                <input id="contact-name" type="text" name="name" required
-                  className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
-                  placeholder={t.contact.namePlaceholder} />
+            {siteContent.formspreeId ? (
+              <form action={`https://formspree.io/f/${siteContent.formspreeId}`} method="POST"
+                className={`rounded-xl p-6 space-y-4 ${isDark ? 'bg-surface-800/60 border border-surface-700/50' : 'bg-white border border-surface-200 shadow-sm'}`}>
+                {/* Form fields */}
+                <div>
+                  <label htmlFor="contact-name" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.name}</label>
+                  <input id="contact-name" type="text" name="name" required
+                    className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
+                    placeholder={t.contact.namePlaceholder} />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.email}</label>
+                  <input id="contact-email" type="email" name="email" required
+                    className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
+                    placeholder={t.contact.emailPlaceholder} />
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.message}</label>
+                  <textarea id="contact-message" name="message" rows={4} required
+                    className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 resize-none ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
+                    placeholder={t.contact.messagePlaceholder} />
+                </div>
+                <Button variant="primary" isDark={isDark} className="w-full">
+                  <FiSend size={14} /> {t.contact.send}
+                </Button>
+              </form>
+            ) : (
+              <div className={`rounded-xl p-8 flex flex-col items-center justify-center text-center space-y-4 h-full min-h-[300px] border ${isDark ? 'bg-surface-800/60 border-surface-700/50' : 'bg-white border-surface-200 shadow-sm'}`}>
+                <FiMail size={32} className={isDark ? 'text-surface-200/50' : 'text-surface-700/50'} />
+                <div>
+                  <h3 className={`font-semibold ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>Contact Form Disabled</h3>
+                  <p className={`text-sm mt-2 max-w-xs mx-auto ${isDark ? 'text-surface-200/60' : 'text-surface-700/60'}`}>
+                    Please email me directly at <a href={`mailto:${siteContent.contactEmail}`} className="text-primary-500 hover:underline">{siteContent.contactEmail}</a>
+                  </p>
+                </div>
               </div>
-              <div>
-                <label htmlFor="contact-email" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.email}</label>
-                <input id="contact-email" type="email" name="email" required
-                  className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
-                  placeholder={t.contact.emailPlaceholder} />
-              </div>
-              <div>
-                <label htmlFor="contact-message" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.message}</label>
-                <textarea id="contact-message" name="message" rows={4} required
-                  className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 resize-none ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
-                  placeholder={t.contact.messagePlaceholder} />
-              </div>
-              <Button variant="primary" isDark={isDark} className="w-full">
-                <FiSend size={14} /> {t.contact.send}
-              </Button>
-            </form>
+            )}
           </AnimateOnScroll>
+
         </div>
       </div>
     </section>

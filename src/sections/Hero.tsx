@@ -8,6 +8,7 @@ import { Button } from '../components/ui/Button';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { useLanguage } from '../hooks/useLanguage';
 import { SectionBackground } from '../components/ui/SectionBackground';
+import { ErrorBoundary } from '../components/ui/ErrorBoundary';
 
 const NeuralLattice = lazy(() =>
   import('../components/three/NeuralLattice').then((m) => ({ default: m.NeuralLattice }))
@@ -51,16 +52,18 @@ export function Hero({ isDark }: { isDark: boolean }) {
         
         {webglSupported && !prefersReduced ? (
           <div className="absolute inset-0 z-10">
-            <Suspense fallback={null}>
-              <Canvas
-                camera={{ position: [0, 0, 9], fov: 55 }}
-                dpr={[1, 1.5]}
-                style={{ background: 'transparent' }}
-                gl={{ antialias: false, alpha: true }}
-              >
-                <NeuralLattice />
-              </Canvas>
-            </Suspense>
+            <ErrorBoundary fallback={<div className="absolute inset-0 bg-surface-900/10" />}>
+              <Suspense fallback={null}>
+                <Canvas
+                  camera={{ position: [0, 0, 9], fov: 55 }}
+                  dpr={[1, 1.5]}
+                  style={{ background: 'transparent' }}
+                  gl={{ antialias: false, alpha: true }}
+                >
+                  <NeuralLattice />
+                </Canvas>
+              </Suspense>
+            </ErrorBoundary>
           </div>
         ) : (
           <div
