@@ -1,7 +1,7 @@
 import { Suspense, lazy, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'motion/react';
-import { FiArrowDown, FiGithub, FiLinkedin, FiMail, FiFileText } from 'react-icons/fi';
+import { FiArrowDown, FiGithub, FiLinkedin, FiMail, FiFileText, FiGlobe, FiExternalLink } from 'react-icons/fi';
 import { SiGooglescholar } from 'react-icons/si';
 import { siteContent } from '../data/content';
 import { Button } from '../components/ui/Button';
@@ -19,6 +19,8 @@ const socialIcons = {
   linkedin: FiLinkedin,
   scholar: SiGooglescholar,
   email: FiMail,
+  website: FiGlobe,
+  orcid: SiGooglescholar,
 };
 
 function useWebGLSupport() {
@@ -38,6 +40,7 @@ function useWebGLSupport() {
 export function Hero({ isDark }: { isDark: boolean }) {
   const prefersReduced = useReducedMotion();
   const webglSupported = useWebGLSupport();
+  const [contextLost, setContextLost] = useState(false);
   const { t } = useLanguage();
 
   return (
@@ -50,7 +53,7 @@ export function Hero({ isDark }: { isDark: boolean }) {
       {/* 3D Background (with WebGL fallback) */}
       <div className="absolute inset-0 z-0">
         
-        {webglSupported && !prefersReduced ? (
+        {webglSupported && !prefersReduced && !contextLost ? (
           <div className="absolute inset-0 z-10">
             <ErrorBoundary fallback={<div className="absolute inset-0 bg-surface-900/10" />}>
               <Suspense fallback={null}>
@@ -59,6 +62,12 @@ export function Hero({ isDark }: { isDark: boolean }) {
                   dpr={[1, 1.5]}
                   style={{ background: 'transparent' }}
                   gl={{ antialias: false, alpha: true }}
+                  onCreated={({ gl }) => {
+                    gl.domElement.addEventListener('webglcontextlost', (e) => {
+                      e.preventDefault();
+                      setContextLost(true);
+                    });
+                  }}
                 >
                   <NeuralLattice />
                 </Canvas>

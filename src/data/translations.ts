@@ -4,12 +4,12 @@ export interface Translations {
   // Navigation
   nav: {
     about: string;
+    education: string;
     experience: string;
     projects: string;
     research: string;
     skills: string;
     aiLab: string;
-    blog: string;
     contact: string;
   };
   // Hero
@@ -27,6 +27,16 @@ export interface Translations {
     subtitle: string;
     focusLabel: string;
     missionLabel: string;
+  };
+  // Education
+  education: {
+    title: string;
+    subtitle: string;
+  };
+  // Academic Engagement
+  academicEngagement: {
+    title: string;
+    subtitle: string;
   };
   // Experience
   experience: {
@@ -79,7 +89,7 @@ export interface Translations {
       insight: string;
     };
   };
-  // Blog / Research Notes
+  // Blog
   blog: {
     title: string;
     subtitle: string;
@@ -124,80 +134,115 @@ export interface Translations {
     title: string;
     subtitle: string;
   };
+  // HR / Executive View
+  hrView: {
+    badge: string;
+    switchTitle: string;
+    switchDesc: string;
+    switchToInteractive: string;
+    switchToHR: string;
+    downloadCV: string;
+    copyEmail: string;
+    copied: string;
+    print: string;
+    executiveSummary: string;
+    educationTitle: string;
+    academicEngagementTitle: string;
+    experienceTitle: string;
+    researchProjectsTitle: string;
+    publicationsTitle: string;
+    skillsTitle: string;
+    contactTitle: string;
+    statusBadge: string;
+    quickStats: {
+      currentRole: string;
+      degree: string;
+      publications: string;
+      focus: string;
+    };
+  };
 }
 
 // ——————————————————————————————————————————————————————————
-// EDIT YOUR ENGLISH TEXT HERE
+// ENGLISH TEXT
 // ——————————————————————————————————————————————————————————
 const en: Translations = {
   nav: {
     about: 'About',
+    education: 'Education',
     experience: 'Experience',
     projects: 'Projects',
     research: 'Research',
     skills: 'Skills',
     aiLab: 'AI Lab',
-    blog: 'Blog',
     contact: 'Contact',
   },
   hero: {
     greeting: "Hello, I'm",
     summary:
-      'Building intelligent systems at the intersection of computer vision, multimodal AI, and research-driven software engineering. Focused on turning deep technical insight into impactful, deployable solutions.',
-    viewProjects: 'View Projects',
-    viewResearch: 'View Research',
+      'MSc AI/ML student at TU Darmstadt and Computer Vision Researcher at Fraunhofer SIT. Pioneering explainable artificial intelligence, robust visual perception, and dense prediction models for safety-critical systems.',
+    viewProjects: 'View Research & Projects',
+    viewResearch: 'Research Focus',
     contactMe: 'Contact Me',
-    downloadCV: 'Download CV',
+    downloadCV: 'Download Resume',
   },
   about: {
-    title: 'About',
-    subtitle: 'Building at the intersection of AI research and engineering',
-    focusLabel: 'Research & Engineering Focus',
-    missionLabel: 'Mission',
+    title: 'Research Profile',
+    subtitle: 'Advancing trustworthy visual intelligence through rigorous theory and scalable engineering',
+    focusLabel: 'Core Research Areas',
+    missionLabel: 'Research Philosophy',
+  },
+  education: {
+    title: 'Education',
+    subtitle: 'Academic foundation across leading European & international institutions',
+  },
+  academicEngagement: {
+    title: 'Academic Engagement & Honors',
+    subtitle: 'Selective researcher networks, international representation, and research bootcamps',
   },
   experience: {
-    title: 'Experience',
-    subtitle: 'Professional journey in AI and software engineering',
+    title: 'Work Experience',
+    subtitle: 'Applied AI research, security engineering, and production systems',
   },
   projects: {
-    title: 'Projects',
-    subtitle: 'Research-driven AI systems and software engineering',
+    title: 'Research Projects & Case Studies',
+    subtitle: 'Novel architectures, benchmark investigations, and safety-critical vision systems',
     all: 'All',
     details: 'Details',
-    problem: 'Problem',
-    approach: 'Technical Approach',
-    outcome: 'Outcome',
+    problem: 'Problem Statement',
+    approach: 'Methodology & Architecture',
+    outcome: 'Key Results & Evaluation',
     techStack: 'Tech Stack',
     categories: 'Categories',
     github: 'GitHub',
-    liveDemo: 'Live Demo',
+    liveDemo: 'Paper / Project Link',
   },
   research: {
     title: 'Research Themes & Publications',
-    subtitle: 'Exploring the frontiers of computer vision and physics-informed AI',
-    themesTitle: 'Core Research Areas',
-    themesSubtitle: 'My academic focus and investigative directions',
-    publicationTitle: 'Selected Publications',
-    publishedPaper: 'Published Paper',
-    readPaper: 'Read Paper',
-    googleScholar: 'Google Scholar',
-    moreComingSoon: 'More publications coming soon',
+    subtitle: 'Explainable AI, metric faithfulness, demographic fairness, and physics-informed models',
+    themesTitle: 'Core Research Pillars',
+    themesSubtitle: 'Active theoretical and empirical directions',
+    publicationTitle: 'Peer-Reviewed Publication',
+    publishedPaper: 'Springer Nature Article',
+    readPaper: 'Read on Springer',
+    googleScholar: 'Google Scholar Profile',
+    moreComingSoon: 'Additional manuscripts currently in preparation',
   },
   skills: {
-    title: 'Skills & Technologies',
-    subtitle: 'Technical toolkit spanning AI research and software engineering',
+    title: 'Technical Skills & Toolkit',
+    subtitle: 'Comprehensive toolkit spanning deep learning research and scalable software engineering',
   },
   process: {
-    title: 'Engineering Process',
-    subtitle: 'Rigorous methodology from problem framing to production deployment',
+    title: 'Research & Engineering Pipeline',
+    subtitle: 'Rigorous methodology from theoretical formulation to verifiable deployment',
   },
   aiLab: {
-    title: 'AI & Computer Vision Lab',
-    subtitle: 'Interactive explorations in AI systems, explainability, and research',
+    title: 'Interactive 3D AI & Vision Lab',
+    subtitle: 'Interactive 3D convolutional neural network, inference pipeline, and explainability exploration',
     tabs: {
-      pipeline: 'CV Pipeline',
-      research: 'Research Ideas',
-      insight: 'Model Insight',
+      pipeline: 'CV Pipeline & 3D CNN',
+      research: 'Research Directions',
+      insight: 'Model Insight (XAI)',
     },
   },
   blog: {
@@ -209,13 +254,13 @@ const en: Translations = {
   },
   contact: {
     title: 'Get in Touch',
-    subtitle: "Let's discuss AI, research, or engineering opportunities",
+    subtitle: "Let's discuss AI research, computer vision collaborations, or opportunities",
     name: 'Name',
     email: 'Email',
     message: 'Message',
     namePlaceholder: 'Your name',
     emailPlaceholder: 'your.email@example.com',
-    messagePlaceholder: 'Tell me about your project, research idea, or opportunity...',
+    messagePlaceholder: 'Tell me about your team, research idea, or opportunity...',
     send: 'Send Message',
   },
   footer: {
@@ -225,94 +270,127 @@ const en: Translations = {
     learnMore: 'Learn More',
   },
   cvPipeline: {
-    title: 'Computer Vision Pipeline Explorer',
-    subtitle: 'Walk through a typical CV inference pipeline step by step',
+    title: 'Computer Vision Inference Pipeline',
+    subtitle: 'Explore the internal layers, activations, and XAI verification of modern visual recognition',
   },
   researchIdeas: {
-    title: 'AI Research Idea Generator',
-    subtitle: 'Explore curated research directions in AI and computer vision',
-    generate: 'Generate Ideas',
-    generating: 'Generating...',
+    title: 'AI Research Direction Explorer',
+    subtitle: 'Explore curated forward-looking problems in explainability, robustness, and multimodal perception',
+    generate: 'Generate Directions',
+    generating: 'Synthesizing...',
   },
   modelInsight: {
-    title: 'Model Insight Demo',
-    subtitle: 'Explore different explainability techniques for neural network decisions',
+    title: 'Model Insight & XAI Verification',
+    subtitle: 'Compare Saliency Maps, Grad-CAM, and feature activations with live neural scanning',
   },
-
+  hrView: {
+    badge: 'HR / Recruiter Executive Mode',
+    switchTitle: 'Streamlined Executive View',
+    switchDesc: 'Fast, clean, high-density view tailored for hiring managers and recruiters without 3D animation overhead.',
+    switchToInteractive: 'Switch to 3D Interactive Lab',
+    switchToHR: 'HR / Executive View',
+    downloadCV: 'Download Resume (PDF)',
+    copyEmail: 'Copy Email',
+    copied: 'Email Copied!',
+    print: 'Print / Save PDF',
+    executiveSummary: 'Executive Profile & Research Statement',
+    educationTitle: 'Education',
+    academicEngagementTitle: 'Academic Engagement & Honors',
+    experienceTitle: 'Professional & Research Experience',
+    researchProjectsTitle: 'Featured Research Projects & Preprints',
+    publicationsTitle: 'Peer-Reviewed Publications',
+    skillsTitle: 'Technical Toolkit & Competencies',
+    contactTitle: 'Direct Contact Information',
+    statusBadge: 'Open for research & engineering collaborations',
+    quickStats: {
+      currentRole: 'M.Sc. AI/ML @ TU Darmstadt & RA @ Fraunhofer SIT',
+      degree: 'M.Sc. Artificial Intelligence & Machine Learning',
+      publications: 'Discover AI (Springer Nature, 2025)',
+      focus: 'Explainable AI, Computer Vision, Object Detection',
+    },
+  },
 };
 
 // ——————————————————————————————————————————————————————————
-// EDIT YOUR GERMAN TEXT HERE
+// GERMAN TEXT
 // ——————————————————————————————————————————————————————————
 const de: Translations = {
   nav: {
     about: 'Über mich',
+    education: 'Ausbildung',
     experience: 'Erfahrung',
     projects: 'Projekte',
     research: 'Forschung',
     skills: 'Kompetenzen',
     aiLab: 'KI-Labor',
-    blog: 'Blog',
     contact: 'Kontakt',
   },
   hero: {
     greeting: 'Hallo, ich bin',
     summary:
-      'Entwicklung intelligenter Systeme an der Schnittstelle von Computer Vision, multimodaler KI und forschungsgetriebener Softwareentwicklung. Mit dem Fokus darauf, tiefgreifende technische Erkenntnisse in wirkungsvolle, einsetzbare Lösungen umzusetzen.',
-    viewProjects: 'Projekte ansehen',
-    viewResearch: 'Forschung ansehen',
+      'MSc-Student in AI/ML an der TU Darmstadt und Computer Vision Researcher am Fraunhofer SIT. Forschung an erklärbarer KI, robuster visueller Wahrnehmung und dichten Vorhersagemodellen für sicherheitskritische Systeme.',
+    viewProjects: 'Forschung & Projekte ansehen',
+    viewResearch: 'Forschungsschwerpunkte',
     contactMe: 'Kontakt',
-    downloadCV: 'Lebenslauf',
+    downloadCV: 'Lebenslauf herunterladen',
   },
   about: {
-    title: 'Über mich',
-    subtitle: 'An der Schnittstelle von KI-Forschung und Softwareentwicklung',
-    focusLabel: 'Forschungs- & Entwicklungsschwerpunkte',
-    missionLabel: 'Mission',
+    title: 'Forschungsprofil',
+    subtitle: 'Entwicklung vertrauenswürdiger visueller Intelligenz durch Theorie und skalierbare Systeme',
+    focusLabel: 'Zentrale Forschungsgebiete',
+    missionLabel: 'Forschungsphilosophie',
+  },
+  education: {
+    title: 'Akademische Ausbildung',
+    subtitle: 'Wissenschaftliche Grundlage an führenden europäischen und internationalen Institutionen',
+  },
+  academicEngagement: {
+    title: 'Akademisches Engagement & Auszeichnungen',
+    subtitle: 'Forschungsnetzwerke, internationale Repräsentanz und Research Bootcamps',
   },
   experience: {
-    title: 'Erfahrung',
-    subtitle: 'Beruflicher Werdegang in KI und Softwareentwicklung',
+    title: 'Berufserfahrung',
+    subtitle: 'Angewandte KI-Forschung, Sicherheitstechnik und produktive Systeme',
   },
   projects: {
-    title: 'Projekte',
-    subtitle: 'Forschungsgetriebene KI-Systeme und Softwareentwicklung',
+    title: 'Forschungsprojekte & Fallstudien',
+    subtitle: 'Neuartige Architekturen, Benchmark-Analysen und sicherheitskritische Bildverarbeitung',
     all: 'Alle',
     details: 'Details',
     problem: 'Problemstellung',
-    approach: 'Technischer Ansatz',
-    outcome: 'Ergebnis',
+    approach: 'Methodik & Architektur',
+    outcome: 'Wichtigste Ergebnisse & Evaluation',
     techStack: 'Technologien',
     categories: 'Kategorien',
     github: 'GitHub',
-    liveDemo: 'Live-Demo',
+    liveDemo: 'Publikation / Projektlink',
   },
   research: {
     title: 'Forschungsschwerpunkte & Publikationen',
-    subtitle: 'Erforschung der Grenzen von Computer Vision und physik-informierter KI',
-    themesTitle: 'Zentrale Forschungsbereiche',
-    themesSubtitle: 'Mein akademischer Fokus und Untersuchungsrichtungen',
-    publicationTitle: 'Ausgewählte Publikationen',
-    publishedPaper: 'Veröffentlichter Artikel',
-    readPaper: 'Artikel lesen',
-    googleScholar: 'Google Scholar',
-    moreComingSoon: 'Weitere Publikationen in Vorbereitung',
+    subtitle: 'Erklärbare KI, Metrik-Zuverlässigkeit, demografische Fairness und physik-informierte Modelle',
+    themesTitle: 'Zentrale Forschungssäulen',
+    themesSubtitle: 'Aktive theoretische und empirische Richtungen',
+    publicationTitle: 'Peer-Reviewed Publikation',
+    publishedPaper: 'Springer Nature Artikel',
+    readPaper: 'Bei Springer lesen',
+    googleScholar: 'Google Scholar Profil',
+    moreComingSoon: 'Weitere Manuskripte in Vorbereitung',
   },
   skills: {
     title: 'Kompetenzen & Technologien',
-    subtitle: 'Technisches Repertoire über KI-Forschung und Softwareentwicklung hinweg',
+    subtitle: 'Umfassendes Repertoire über Deep-Learning-Forschung und skalierbare Softwareentwicklung hinweg',
   },
   process: {
-    title: 'Entwicklungsprozess',
-    subtitle: 'Rigorose Methodik von der Problemstellung bis zum produktiven Einsatz',
+    title: 'Forschungs- & Entwicklungsprozess',
+    subtitle: 'Rigorose Methodik von der theoretischen Modellierung bis zum produktiven Einsatz',
   },
   aiLab: {
-    title: 'KI- & Computer-Vision-Labor',
-    subtitle: 'Interaktive Erkundungen in KI-Systemen, Erklärbarkeit und Forschung',
+    title: 'Interaktives 3D-KI-Labor',
+    subtitle: 'Interaktives 3D-CNN, Inferenz-Pipeline und Erklärbarkeits-Visualisierungen',
     tabs: {
-      pipeline: 'CV-Pipeline',
-      research: 'Forschungsideen',
-      insight: 'Modellanalyse',
+      pipeline: 'CV-Pipeline & 3D-CNN',
+      research: 'Forschungsrichtungen',
+      insight: 'Modellanalyse (XAI)',
     },
   },
   blog: {
@@ -324,13 +402,13 @@ const de: Translations = {
   },
   contact: {
     title: 'Kontakt aufnehmen',
-    subtitle: 'Lassen Sie uns über KI, Forschung oder Ingenieursprojekte sprechen',
+    subtitle: 'Lassen Sie uns über KI-Forschung, Computer-Vision-Projekte oder Möglichkeiten sprechen',
     name: 'Name',
     email: 'E-Mail',
     message: 'Nachricht',
     namePlaceholder: 'Ihr Name',
     emailPlaceholder: 'ihre.email@beispiel.de',
-    messagePlaceholder: 'Erzählen Sie mir von Ihrem Projekt, Ihrer Forschungsidee oder Gelegenheit...',
+    messagePlaceholder: 'Erzählen Sie mir von Ihrem Team, Ihrer Forschungsidee oder Gelegenheit...',
     send: 'Nachricht senden',
   },
   footer: {
@@ -340,20 +418,45 @@ const de: Translations = {
     learnMore: 'Mehr erfahren',
   },
   cvPipeline: {
-    title: 'Computer-Vision-Pipeline-Explorer',
-    subtitle: 'Durchlaufen Sie eine typische CV-Inferenz-Pipeline Schritt für Schritt',
+    title: 'Computer-Vision-Inferenz-Pipeline',
+    subtitle: 'Erkunden Sie Schichten, Aktivierungen und XAI-Verifikation moderner Bildverarbeitung',
   },
   researchIdeas: {
-    title: 'KI-Forschungsideen-Generator',
-    subtitle: 'Kuratierte Forschungsrichtungen in KI und Computer Vision erkunden',
-    generate: 'Ideen generieren',
-    generating: 'Wird generiert...',
+    title: 'KI-Forschungsrichtungen-Explorer',
+    subtitle: 'Zukunftsweisende Fragestellungen in Erklärbarkeit, Robustheit und multimodaler Wahrnehmung',
+    generate: 'Richtungen generieren',
+    generating: 'Wird synthetisiert...',
   },
   modelInsight: {
-    title: 'Modellanalyse-Demo',
-    subtitle: 'Verschiedene Erklärbarkeitstechniken für neuronale Netze erkunden',
+    title: 'Modellanalyse & XAI-Verifikation',
+    subtitle: 'Vergleichen Sie Saliency Maps, Grad-CAM und Aktivierungen mit Live-Neuronalem Scan',
   },
-
+  hrView: {
+    badge: 'HR / Recruiter Kompaktmodus',
+    switchTitle: 'Optimierte Kompaktansicht',
+    switchDesc: 'Schnelle, übersichtliche Darstellung speziell für Recruiter und Hiring Manager ohne 3D-Grafiken.',
+    switchToInteractive: 'Zum interaktiven 3D-Labor wechseln',
+    switchToHR: 'HR / Kompaktansicht',
+    downloadCV: 'Lebenslauf (PDF) herunterladen',
+    copyEmail: 'E-Mail kopieren',
+    copied: 'E-Mail kopiert!',
+    print: 'Drucken / PDF speichern',
+    executiveSummary: 'Wissenschaftliches Profil & Zusammenfassung',
+    educationTitle: 'Akademische Ausbildung',
+    academicEngagementTitle: 'Akademisches Engagement & Auszeichnungen',
+    experienceTitle: 'Berufs- & Forschungserfahrung',
+    researchProjectsTitle: 'Ausgewählte Forschungsprojekte & Preprints',
+    publicationsTitle: 'Peer-Reviewed Publikationen',
+    skillsTitle: 'Technisches Profil & Kernkompetenzen',
+    contactTitle: 'Direkter Kontakt',
+    statusBadge: 'Offen für Forschungs- und Industrie-Kollaborationen',
+    quickStats: {
+      currentRole: 'M.Sc. AI/ML @ TU Darmstadt & WiMi @ Fraunhofer SIT',
+      degree: 'M.Sc. Artificial Intelligence & Machine Learning',
+      publications: 'Discover AI (Springer Nature, 2025)',
+      focus: 'Erklärbare KI, Computer Vision, Objekterkennung',
+    },
+  },
 };
 
 export const translations: Record<Language, Translations> = { en, de };

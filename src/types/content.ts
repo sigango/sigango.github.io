@@ -1,7 +1,25 @@
 export interface SocialLink {
   label: string;
   url: string;
-  icon: 'github' | 'linkedin' | 'scholar' | 'email';
+  icon: 'github' | 'linkedin' | 'scholar' | 'email' | 'website' | 'orcid';
+}
+
+export interface Education {
+  id: string;
+  institution: string;
+  degree: string;
+  period: string;
+  location: string;
+  details?: string[];
+}
+
+export interface AcademicEngagement {
+  id: string;
+  program: string;
+  role: string;
+  period: string;
+  location: string;
+  details: string[];
 }
 
 export interface Experience {
@@ -25,11 +43,13 @@ export interface Project {
   categories: ProjectCategory[];
   githubUrl: string;
   demoUrl: string;
-  // Case Study fields
+  role?: string;
+  dateRange?: string;
+  status?: string;
+  keyPoints?: string[];
   caseStudy?: boolean;
   learnings?: string;
   future?: string;
-  // Expanding tech stack for case studies
   architectureUrl?: string;
 }
 
@@ -48,6 +68,7 @@ export interface Publication {
   year: number;
   summary: string;
   url: string;
+  doi: string;
   scholarUrl: string;
 }
 
@@ -87,12 +108,15 @@ export interface SiteContent {
   cvUrl: string;
   socialLinks: SocialLink[];
   interests: InterestChip[];
+  education: Education[];
+  academicEngagement: AcademicEngagement[];
   experiences: Experience[];
   projects: Project[];
   publication: Publication;
   skillCategories: SkillCategory[];
   contactEmail: string;
   contactMessage: string;
+  location?: string;
   formspreeId?: string;
 }
 

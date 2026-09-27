@@ -1,4 +1,5 @@
-import { FiMail, FiGithub, FiLinkedin, FiSend } from 'react-icons/fi';
+import { useState } from 'react';
+import { FiMail, FiGithub, FiLinkedin, FiSend, FiCopy, FiCheck } from 'react-icons/fi';
 import { SiGooglescholar } from 'react-icons/si';
 import { siteContent } from '../data/content';
 import { SectionHeading } from '../components/ui/SectionHeading';
@@ -10,11 +11,30 @@ const contactLinks = [
   { label: 'Email', value: siteContent.contactEmail, href: `mailto:${siteContent.contactEmail}`, icon: FiMail },
   { label: 'GitHub', value: 'sigango', href: 'https://github.com/sigango', icon: FiGithub },
   { label: 'LinkedIn', value: 'linhngo1012', href: 'https://linkedin.com/in/linhngo1012/', icon: FiLinkedin },
-  { label: 'Google Scholar', value: 'Phuc Linh Ngo', href: 'https://scholar.google.com/citations?user=oNDaKAQAAAAJ&hl=en', icon: SiGooglescholar },
+  { label: 'Google Scholar', value: 'Linh Phuc Ngo', href: 'https://scholar.google.com/citations?user=oNDaKAQAAAAJ&hl=en', icon: SiGooglescholar },
 ];
 
 export function Contact({ isDark }: { isDark: boolean }) {
   const { t } = useLanguage();
+  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(siteContent.contactEmail);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleFallbackSubmit = (e: React.FormEvent) => {
+    if (!siteContent.formspreeId) {
+      e.preventDefault();
+      const subject = encodeURIComponent(`Collaboration Inquiry from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Hi Linh,\n\n${formData.message}\n\nBest regards,\n${formData.name}\n${formData.email}`
+      );
+      window.location.href = `mailto:${siteContent.contactEmail}?subject=${subject}&body=${body}`;
+    }
+  };
 
   return (
     <section id="contact" className={`py-24 section-padding ${isDark ? 'bg-surface-900/50' : 'bg-surface-50'}`}>
@@ -26,69 +46,144 @@ export function Contact({ isDark }: { isDark: boolean }) {
         <div className="grid md:grid-cols-2 gap-10">
           <AnimateOnScroll direction="left" delay={0.1}>
             <div className="space-y-6">
-              <p className={`text-base leading-relaxed ${isDark ? 'text-surface-200/70' : 'text-surface-700'}`}>
+              <p className={`text-base leading-relaxed ${isDark ? 'text-surface-200/80' : 'text-surface-700'}`}>
                 {siteContent.contactMessage}
               </p>
-              <div className="space-y-4">
+              
+              <div className="space-y-3">
                 {contactLinks.map((link) => (
-                  <a key={link.label} href={link.href}
+                  <a
+                    key={link.label}
+                    href={link.href}
                     target={link.label === 'Email' ? undefined : '_blank'}
                     rel={link.label === 'Email' ? undefined : 'noopener noreferrer'}
-                    className={`flex items-center gap-4 p-3 rounded-xl transition-all duration-200 group ${isDark ? 'hover:bg-white/5' : 'hover:bg-surface-100'}`}
+                    className={`flex items-center gap-4 p-3 rounded-xl transition-all duration-200 group border ${
+                      isDark
+                        ? 'bg-surface-850/50 border-surface-800 hover:border-primary-500/40 hover:bg-surface-800'
+                        : 'bg-white border-slate-200 hover:border-primary-400 hover:shadow-sm'
+                    }`}
                   >
-                    <div className={`p-2.5 rounded-xl transition-colors ${isDark ? 'bg-surface-800 text-surface-200/60 group-hover:text-primary-400 group-hover:bg-primary-500/10' : 'bg-surface-100 text-surface-700/60 group-hover:text-primary-600 group-hover:bg-primary-50'}`}>
+                    <div
+                      className={`p-2.5 rounded-xl transition-colors ${
+                        isDark
+                          ? 'bg-surface-800 text-surface-200/60 group-hover:text-primary-400 group-hover:bg-primary-500/10'
+                          : 'bg-surface-100 text-surface-700/60 group-hover:text-primary-600 group-hover:bg-primary-50'
+                      }`}
+                    >
                       <link.icon size={18} />
                     </div>
-                    <div>
-                      <p className={`text-xs font-medium uppercase tracking-wider ${isDark ? 'text-surface-200/40' : 'text-surface-700/40'}`}>{link.label}</p>
-                      <p className={`text-sm font-medium ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{link.value}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className={`text-[10px] font-mono font-semibold uppercase tracking-wider ${isDark ? 'text-surface-400' : 'text-slate-500'}`}>
+                        {link.label}
+                      </p>
+                      <p className={`text-sm font-medium truncate ${isDark ? 'text-surface-100' : 'text-slate-900'}`}>
+                        {link.value}
+                      </p>
                     </div>
                   </a>
                 ))}
               </div>
+
+              {/* Direct copy email button */}
+              <button
+                onClick={handleCopyEmail}
+                className={`w-full py-2.5 px-4 rounded-xl text-xs font-mono font-semibold flex items-center justify-center gap-2 border transition-all cursor-pointer ${
+                  copied
+                    ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+                    : isDark
+                      ? 'bg-surface-800 text-surface-300 border-surface-700 hover:text-white hover:bg-surface-700'
+                      : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                }`}
+              >
+                {copied ? <FiCheck size={14} className="text-emerald-400" /> : <FiCopy size={14} />}
+                <span>{copied ? 'Email Copied to Clipboard!' : 'Copy Email Address'}</span>
+              </button>
             </div>
           </AnimateOnScroll>
 
           <AnimateOnScroll direction="right" delay={0.2}>
-            {siteContent.formspreeId ? (
-              <form action={`https://formspree.io/f/${siteContent.formspreeId}`} method="POST"
-                className={`rounded-xl p-6 space-y-4 ${isDark ? 'bg-surface-800/60 border border-surface-700/50' : 'bg-white border border-surface-200 shadow-sm'}`}>
-                {/* Form fields */}
-                <div>
-                  <label htmlFor="contact-name" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.name}</label>
-                  <input id="contact-name" type="text" name="name" required
-                    className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
-                    placeholder={t.contact.namePlaceholder} />
-                </div>
-                <div>
-                  <label htmlFor="contact-email" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.email}</label>
-                  <input id="contact-email" type="email" name="email" required
-                    className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
-                    placeholder={t.contact.emailPlaceholder} />
-                </div>
-                <div>
-                  <label htmlFor="contact-message" className={`block text-sm font-medium mb-1.5 ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>{t.contact.message}</label>
-                  <textarea id="contact-message" name="message" rows={4} required
-                    className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 resize-none ${isDark ? 'bg-surface-900 border border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-200/30' : 'bg-surface-50 border border-surface-200 text-surface-900 focus:border-primary-500 placeholder:text-surface-700/30'}`}
-                    placeholder={t.contact.messagePlaceholder} />
-                </div>
-                <Button variant="primary" isDark={isDark} className="w-full">
-                  <FiSend size={14} /> {t.contact.send}
-                </Button>
-              </form>
-            ) : (
-              <div className={`rounded-xl p-8 flex flex-col items-center justify-center text-center space-y-4 h-full min-h-[300px] border ${isDark ? 'bg-surface-800/60 border-surface-700/50' : 'bg-white border-surface-200 shadow-sm'}`}>
-                <FiMail size={32} className={isDark ? 'text-surface-200/50' : 'text-surface-700/50'} />
-                <div>
-                  <h3 className={`font-semibold ${isDark ? 'text-surface-200' : 'text-surface-900'}`}>Contact Form Disabled</h3>
-                  <p className={`text-sm mt-2 max-w-xs mx-auto ${isDark ? 'text-surface-200/60' : 'text-surface-700/60'}`}>
-                    Please email me directly at <a href={`mailto:${siteContent.contactEmail}`} className="text-primary-500 hover:underline">{siteContent.contactEmail}</a>
-                  </p>
-                </div>
+            <form
+              action={siteContent.formspreeId ? `https://formspree.io/f/${siteContent.formspreeId}` : undefined}
+              method={siteContent.formspreeId ? 'POST' : undefined}
+              onSubmit={handleFallbackSubmit}
+              className={`rounded-2xl p-6 sm:p-8 space-y-4 border ${
+                isDark ? 'bg-surface-800/60 border-surface-700/50 shadow-xl' : 'bg-white border-slate-200 shadow-md'
+              }`}
+            >
+              <div>
+                <label
+                  htmlFor="contact-name"
+                  className={`block text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 ${isDark ? 'text-surface-300' : 'text-slate-700'}`}
+                >
+                  {t.contact.name}
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 border ${
+                    isDark
+                      ? 'bg-surface-900 border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-600'
+                      : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-primary-500 placeholder:text-slate-400'
+                  }`}
+                  placeholder={t.contact.namePlaceholder}
+                />
               </div>
-            )}
-          </AnimateOnScroll>
 
+              <div>
+                <label
+                  htmlFor="contact-email"
+                  className={`block text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 ${isDark ? 'text-surface-300' : 'text-slate-700'}`}
+                >
+                  {t.contact.email}
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 border ${
+                    isDark
+                      ? 'bg-surface-900 border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-600'
+                      : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-primary-500 placeholder:text-slate-400'
+                  }`}
+                  placeholder={t.contact.emailPlaceholder}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contact-message"
+                  className={`block text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 ${isDark ? 'text-surface-300' : 'text-slate-700'}`}
+                >
+                  {t.contact.message}
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className={`w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 resize-none border ${
+                    isDark
+                      ? 'bg-surface-900 border-surface-700 text-surface-100 focus:border-primary-500 placeholder:text-surface-600'
+                      : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-primary-500 placeholder:text-slate-400'
+                  }`}
+                  placeholder={t.contact.messagePlaceholder}
+                />
+              </div>
+
+              <Button variant="primary" isDark={isDark} className="w-full">
+                <FiSend size={14} /> {t.contact.send}
+              </Button>
+            </form>
+          </AnimateOnScroll>
         </div>
       </div>
     </section>

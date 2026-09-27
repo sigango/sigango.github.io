@@ -1,7 +1,7 @@
-import { useState, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cvPipelineSteps } from '../../data/content';
-import { FiChevronRight, FiChevronLeft, FiPlay, FiPause } from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiPlay, FiPause, FiBox } from 'react-icons/fi';
 import { useLanguage } from '../../hooks/useLanguage';
 
 const CNN3DVisualizer = lazy(() =>
@@ -103,13 +103,13 @@ export function CVPipelineExplorer({ isDark }: { isDark: boolean }) {
   const { t } = useLanguage();
 
   // Auto-play timer
-  useState(() => {
+  useEffect(() => {
     if (!autoPlay) return;
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % cvPipelineSteps.length);
     }, 2500);
     return () => clearInterval(timer);
-  });
+  }, [autoPlay]);
 
   return (
     <div className="space-y-8">
@@ -126,15 +126,16 @@ export function CVPipelineExplorer({ isDark }: { isDark: boolean }) {
       <div className="flex justify-center">
         <button
           onClick={() => setShow3D(!show3D)}
-          className={`px-4 py-2 text-xs font-medium rounded-xl transition-all duration-200 cursor-pointer ${
+          className={`px-4 py-2 text-xs font-medium rounded-xl transition-all duration-200 cursor-pointer flex items-center gap-2 ${
             show3D
               ? 'bg-gradient-to-r from-primary-600 to-accent-500 text-white shadow-lg shadow-primary-500/20'
               : isDark
-                ? 'bg-surface-800/60 text-surface-200/60 border border-surface-700/50 hover:border-primary-500/30'
-                : 'bg-white text-surface-700/60 border border-surface-200 hover:border-primary-300'
+                ? 'bg-surface-800/80 text-surface-200 border border-primary-500/30 hover:border-primary-500/60 shadow-md'
+                : 'bg-white text-surface-800 border border-surface-200 hover:border-primary-400 shadow-sm'
           }`}
         >
-          🧠 {show3D ? 'Hide' : 'Show'} 3D CNN Architecture
+          <FiBox size={14} className={show3D ? 'animate-bounce' : 'text-primary-400'} />
+          <span>{show3D ? 'Hide 3D CNN Architecture' : 'Explore Interactive 3D CNN Model'}</span>
         </button>
       </div>
 
@@ -142,16 +143,25 @@ export function CVPipelineExplorer({ isDark }: { isDark: boolean }) {
       <AnimatePresence>
         {show3D && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.3 }}
+            className="w-full"
           >
-            <Suspense fallback={
-              <div className={`rounded-xl p-8 text-center ${isDark ? 'bg-surface-900/80 border border-surface-700/30' : 'bg-surface-50 border border-surface-200'}`}>
-                <div className="animate-pulse text-sm text-surface-200/40">Loading 3D scene...</div>
-              </div>
-            }>
+            <Suspense
+              fallback={
+                <div
+                  className={`rounded-2xl p-12 text-center border ${
+                    isDark ? 'bg-surface-950 border-surface-800' : 'bg-surface-50 border-surface-200'
+                  }`}
+                >
+                  <div className="animate-pulse text-sm text-primary-400 font-mono">
+                    Initializing 3D Neural Architecture...
+                  </div>
+                </div>
+              }
+            >
               <CNN3DVisualizer isDark={isDark} />
             </Suspense>
           </motion.div>

@@ -1,5 +1,5 @@
 import { siteContent } from '../../data/content';
-import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiGlobe } from 'react-icons/fi';
 import { SiGooglescholar } from 'react-icons/si';
 import { useLanguage } from '../../hooks/useLanguage';
 
@@ -8,6 +8,8 @@ const iconMap = {
   linkedin: FiLinkedin,
   scholar: SiGooglescholar,
   email: FiMail,
+  website: FiGlobe,
+  orcid: SiGooglescholar,
 };
 
 export function Footer({ isDark }: { isDark: boolean }) {
